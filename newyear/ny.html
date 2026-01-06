@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year My Love</title>
+    <style>
+        /* --- CSS STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fce4ec; /* Light pink background */
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            color: #4a4a4a;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1, h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #e91e63;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: #ff80ab;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: 'Fredoka One', cursive;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background-color: #f50057;
+        }
+
+        /* Page Management */
+        .page {
+            display: none; /* Hide all pages by default */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page.active {
+            display: block; /* Show active page */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Countdown Timer */
+        .timer-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .time-unit {
+            background: #f8bbd0;
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 50px;
+        }
+        .time-unit span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .time-unit p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Gifts Grid */
+        .gift-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .gift-icon {
+            font-size: 3rem;
+            background: #fff0f6;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .gift-icon:hover {
+            transform: translateY(-5px);
+            background: #ffc1e3;
+        }
+
+        /* Music Disc Animation */
+       .music-disc {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 20px auto;
+       animation: spin 4s linear infinite;
+       border: 5px solid #333;
+        object-fit: cover;  
+        }
+        
+        @keyframes spin { 
+            100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } 
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: #ccc;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="page1" class="page active">
+            <h2>Open when it's<br>New Year!</h2>
+            <img src="kitty.gif" alt="Hello Kitty" style="width: 150px;">
+            
+            <div class="timer-box">
+                <div class="time-unit"><span id="days">00</span><p>DAYS</p></div>
+                <div class="time-unit"><span id="hours">00</span><p>HOURS</p></div>
+                <div class="time-unit"><span id="mins">00</span><p>MINS</p></div>
+                <div class="time-unit"><span id="secs">00</span><p>SECS</p></div>
+            </div>
+            
+            <button class="btn" onclick="nextPage('page2')">NEXT</button>
+        </div>
+
+        <div id="page2" class="page">
+            <img src="flower.gif" alt="Flower"  style="width: 150px;" >
+            <h2>Hi my love!</h2>
+            <p>I got a surprise for you...</p>
+            
+            <div style="margin-top: 20px;">
+                <button class="btn" onclick="nextPage('page3')">YES</button>
+                <button class="btn" id="noBtn" onmouseover="moveNoButton()">NO</button>
+            </div>
+        </div>
+
+        <div id="page3" class="page">
+           <img src="fireworks.gif" alt="Fireworks" style="width: 100%;">
+            <h1>Happy New Year<br>My Love! ❤️</h1>
+            <p>May our love continue to blossom and flourish forever.</p>
+            <button class="btn" onclick="nextPage('page4')">See Gifts</button>
+        </div>
+
+        <div id="page4" class="page">
+            <h2>Gifts For You 🎁</h2>
+            <p>Pick one to open!</p>
+            
+            <div class="gift-grid">
+                <div class="gift-icon" onclick="nextPage('gift-letter')">💌</div>
+                <div class="gift-icon" onclick="nextPage('gift-flower')">🌹</div>
+                <div class="gift-icon" onclick="nextPage('gift-photos')">📸</div>
+                <div class="gift-icon" onclick="nextPage('gift-music')">🎵</div>
+            </div>
+        </div>
+
+        <div id="gift-letter" class="page">
+            <h2>My Letter to You 💌</h2>
+            <p style="text-align: justify; padding: 10px; font-style: italic;">
+                "Happy New year Shibi, hope you like it 🥰 something new,
+This year just might be my best year bestest year with you yet, the year went so lavkrrr from our sleepover to our clg our birthdays it went so quickly but the main thing is am the happiest person to enjoy and spend all that time with YOU. you re really really special to me shubhra and i love you a lot the first time i fell in love with how pretty you re how cute you look the first glance the handshake...even if you never agree youre just the prettiest gurll out there your the best girlfriend and wife i could ever get and ever wanted and the second time i fell in love with you was the time i got to know you how great of a person you really really are i fell in love harder frrr this year it gave me all you being from my gf to my freaking WIFE MY BABY i just cannot stop thinking about you anytime from the time i wake up to the time i sleep its YOU for me thats how special you re to me shubhra i wove youu majha pillu ...happy one year to our engagement heheheheh am blessed to have youu
+letsss Havee a greatt greatt next yearr aheadd togthether and to many more HAPPYYY NEWW YEAR SHIBII . I LOVEE YOUU FOREVERR"
+            </p>
+            <button class="btn back-btn" onclick="nextPage('page4')">Back</button>
+        </div>
+
+        <div id="gift-flower" class="page">
+            <h2>For You 🌹</h2>
+            <img src="images.gif" alt="Flower Bear" style="width: 100%;">
+            <p>A virtual bouquet for my prettiest gurll.</p>
+            <button class="btn back-btn" onclick="nextPage('page4')">Back</button>
+        </div>
+
+        <div id="gift-photos" class="page">
+            <h2>Best Moments 📸</h2>
+            <img src="lastyr.jpeg" alt="Photo 1">
+            <img src="us.jpeg" alt="Photo 2">
+            <p>Every memory with you is my favorite.</p>
+            <button class="btn back-btn" onclick="nextPage('page4')">Back</button>
+        </div>
+
+        <div id="gift-music" class="page">
+            <h2>Our Song 🎵</h2>
+            <img src="cd.jpeg" class="music-disc" alt="Our Song">
+          <p><i>"Love of my dreams, but better. You're real."</i></p>
+            <audio id="bgMusic" controls style="width: 100%; margin-top: 10px;">
+                <source src="oursong.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <button class="btn back-btn" onclick="nextPage('page4')">Back</button>
+        </div>
+
+    </div>
+
+    <script>
+        /* --- JAVASCRIPT LOGIC --- */
+
+        // 1. Navigation Function
+        function nextPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show target page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Play music automatically if entering music page
+            if(pageId === 'gift-music') {
+                document.getElementById('bgMusic').play();
+            }
+        }
+
+        // 2. Countdown Timer Logic
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            // Set target to next January 1st
+            const nextYear = new Date(`January 1, ${currentYear + 1} 00:00:00`);
+            
+            const diff = nextYear - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('mins').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('secs').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+        setInterval(updateCountdown, 1000);
+
+        // 3. Moving "No" Button (The prank)
+        function moveNoButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * 200 - 100; // Random X movement
+            const y = Math.random() * 200 - 100; // Random Y movement
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    </script>
+</body>
+</html>
